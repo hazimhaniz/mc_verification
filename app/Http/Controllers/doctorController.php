@@ -7,7 +7,7 @@ use App\doctor;
 use App\mc;
 use App\Mail\mailmc;
 
-
+//sayonara
 
 class doctorController extends Controller
 {
