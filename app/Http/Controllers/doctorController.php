@@ -30,6 +30,7 @@ class doctorController extends Controller
         if ($password == $docExist->doctor_password){
             
             return response()->json(['success' => "success", 'loginid' => $login_id]);
+            \Session::put('logged_doc', 'success');
             
         }
         
@@ -163,6 +164,8 @@ class doctorController extends Controller
         //$hp = $doctor->doctor_hpno;
 
         return view('update_doctor_acc', compact(['doctor', 'loginid']));
+
+        //print number in reversed order
 
        
     }

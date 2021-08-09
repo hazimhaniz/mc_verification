@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\doctorController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Middleware\login;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,7 +20,7 @@ Route::get('/', function () {
 });
 
 
-
+Route::middleware([login::class])->group(function () {
 
 Route::get('update_account_doc/{loginid}', 'doctorController@update_acc_view')->name('update_doc_view');
 
@@ -38,7 +39,7 @@ Route::get('mcqr/{id}', 'doctorController@mcqr');
 
 
 
-Route::get('admin_login', 'adminLoginController@adminLogin')->name('adminLogin');
+Route::get('admin_login', 'adminLoginController@adminLogin')->name('adminLogin')->withoutMiddleware([login::class]);
 Route::get('admin_login_check', 'adminLoginController@checkLogin')->name('adminLoginCheck');
 Route::get('admin_dashboard', 'adminLoginController@adminDashboard')->name('adminDashboard');
 
@@ -46,7 +47,7 @@ Route::get('admin_login_check', 'adminLoginController@checkLogin')->name('adminL
 
 Route::get('doctor_login',function () {
     return view('doctorlogin');
-});
+})->withoutMiddleware([login::class]);
 
 Route::get('doctorLoginCheck', 'doctorController@checklogin');
 
@@ -74,3 +75,7 @@ Route::prefix('admin_dashboard')->group(function () {
 // Route::get('register_doctor',  function () {
 //     return view('regdoc');
 // });
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+});

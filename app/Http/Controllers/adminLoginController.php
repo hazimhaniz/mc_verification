@@ -33,6 +33,9 @@ class adminLoginController extends Controller
         if ( $password == $emailExist->admin_password){
 
             \Session::put('cred', $emailExist->admin_id );
+            \Session::put('logged_in', 'success');
+
+           
             
             return response()->json(['success' => "success"]);
             
